@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 188507b67ec419645a82f5a42587b3ef, type: 3}
   m_Name: QuitCommand
   m_EditorClassIdentifier: 
-  commandKey: quit
+  commandKey: /quit
   description: Quit Application.
