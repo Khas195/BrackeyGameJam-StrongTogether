@@ -409,11 +409,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 305bdcf54ef9653489a827bfbef3d6df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  TestPlayer: {fileID: 1893375949}
   unwalkableMask:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 256
   gridWorldSize: {x: 60, y: 60}
   nodeRadius: 0.5
+  nodeDiameter: 1
+  gridSizeX: 60
+  gridSizeY: 60
 --- !u!4 &786287262
 Transform:
   m_ObjectHideFlags: 0
@@ -521,7 +525,7 @@ GameObject:
   - component: {fileID: 1281482106}
   - component: {fileID: 1281482105}
   - component: {fileID: 1281482107}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: TestEnvironment (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -587,7 +591,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1281482104}
   m_LocalRotation: {x: -0, y: -0, z: 0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: 4.12, y: -1.23, z: 0.7026408}
+  m_LocalPosition: {x: 4.37, y: -0.95, z: 0.7026408}
   m_LocalScale: {x: 4.170202, y: 1.0000004, z: 0}
   m_Children: []
   m_Father: {fileID: 2089727292}
@@ -712,7 +716,7 @@ GameObject:
   - component: {fileID: 1506466171}
   - component: {fileID: 1506466170}
   - component: {fileID: 1506466172}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: TestEnvironment (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -821,7 +825,7 @@ GameObject:
   - component: {fileID: 1827581450}
   - component: {fileID: 1827581449}
   - component: {fileID: 1827581451}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: TestEnvironment (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -887,7 +891,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1827581448}
   m_LocalRotation: {x: -0, y: -0, z: 0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: -8.71, y: -1.24, z: 0.7026408}
+  m_LocalPosition: {x: -8.63, y: -1.56, z: 0.7026408}
   m_LocalScale: {x: 3.4570005, y: 1.0000004, z: 0}
   m_Children: []
   m_Father: {fileID: 2089727292}
@@ -995,7 +999,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1893375947}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -5.95, y: 2.311054, z: 0}
+  m_LocalPosition: {x: 0.47, y: 1.02, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 0}
   m_Children: []
   m_Father: {fileID: 1910638377}
@@ -1045,7 +1049,7 @@ GameObject:
   - component: {fileID: 1971744916}
   - component: {fileID: 1971744915}
   - component: {fileID: 1971744917}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: TestEnvironment (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
