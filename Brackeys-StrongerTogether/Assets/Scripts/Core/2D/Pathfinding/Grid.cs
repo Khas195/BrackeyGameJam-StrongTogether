@@ -5,10 +5,14 @@ using NaughtyAttributes;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 [ExecuteInEditMode]
-public class Grid : MonoBehaviour
+public class Grid : SingletonMonobehavior<Grid>
 {
     [SerializeField]
-    Transform TestPlayer = null;
+    List<Node> path = new List<Node>();
+    [SerializeField]
+    Transform seeker = null;
+    [SerializeField]
+    Transform target = null;
     [SerializeField]
     LayerMask unwalkableMask;
     [SerializeField]
@@ -50,10 +54,31 @@ public class Grid : MonoBehaviour
             {
                 Vector3 worldPoint = worldBottomLeft + Vector3.right * (x * nodeDiameter + nodeRadius) + Vector3.up * (y * nodeDiameter + nodeRadius);
                 bool walkable = !(Physics2D.OverlapBox(worldPoint, new Vector2(nodeRadius, nodeRadius), 0, unwalkableMask));
-                grid[x, y] = new Node(walkable, worldPoint);
+                grid[x, y] = new Node(walkable, worldPoint, x, y);
             }
         }
     }
+
+    public List<Node> GetNeighbourNodes(Node node)
+    {
+        List<Node> neighbours = new List<Node>();
+        for (int x = -1; x <= 1; x++)
+        {
+            for (int y = -1; y <= 1; y++)
+            {
+                if (x == 0 && y == 0) continue;
+                int checkX = node.gridX + x;
+                int checkY = node.gridY + y;
+
+                if (checkX >= 0 && checkX < gridSizeX && checkY >= 0 && checkY < gridSizeY)
+                {
+                    neighbours.Add(grid[checkX, checkY]);
+                }
+            }
+        }
+        return neighbours;
+    }
+
     [SerializeField]
     void UpdateGridState()
     {
@@ -78,12 +103,16 @@ public class Grid : MonoBehaviour
 
         if (grid != null)
         {
-            Node playerNode = GetNodeFromWorldPoint(this.TestPlayer.position);
+            Node playerNode = GetNodeFromWorldPoint(this.seeker.position);
             foreach (var n in grid)
             {
                 if (n == playerNode)
                 {
                     Gizmos.color = Color.blue;
+                }
+                else if (path.Contains(n))
+                {
+                    Gizmos.color = Color.green;
                 }
                 else
                 {
@@ -106,11 +135,18 @@ public class Grid : MonoBehaviour
         return grid[x, y];
 
     }
+    public bool findPath = false;
     private void Update()
     {
         if (grid != null)
         {
             UpdateGridState();
+
+            if (findPath)
+            {
+                path = PathFinding2D.GetInstance().FindPath(seeker.position, target.position);
+            }
         }
+
     }
 }
