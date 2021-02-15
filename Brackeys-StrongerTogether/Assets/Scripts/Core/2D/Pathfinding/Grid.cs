@@ -97,16 +97,13 @@ public class Grid : MonoBehaviour
         Gizmos.DrawWireCube(transform.position, new Vector3(gridWorldSize.x, gridWorldSize.y, 0));
 
 
-        if (grid != null)
+        if (grid != null && showGizmos == true)
         {
             foreach (var n in grid)
             {
-                if (showGizmos == false)
-                {
-                    Gizmos.color = (n.walkable) ? Color.white : Color.red;
-                    Gizmos.DrawWireCube(n.worldPosition, Vector3.one * (nodeDiameter - 0.05f));
-                }
 
+                Gizmos.color = (n.walkable) ? Color.white : Color.red;
+                Gizmos.DrawWireCube(n.worldPosition, Vector3.one * (nodeDiameter - 0.05f));
             }
         }
     }
@@ -123,8 +120,6 @@ public class Grid : MonoBehaviour
         return grid[x, y];
 
     }
-    public bool findPath = false;
-
     public int MaxSize
     {
         get

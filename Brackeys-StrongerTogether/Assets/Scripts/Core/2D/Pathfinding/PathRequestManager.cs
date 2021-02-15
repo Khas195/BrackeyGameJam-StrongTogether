@@ -15,11 +15,11 @@ public class PathRequestManager : SingletonMonobehavior<PathRequestManager>
         base.Awake();
         this.pathFindingAlgorithm = this.GetComponent<PathFinding2D>();
     }
-    public static void RequestPath(Vector3 pathStart, Vector3 pathEnd, Action<Vector3[], bool> callback)
+    public void RequestPath(Vector3 pathStart, Vector3 pathEnd, Action<Vector3[], bool> callback)
     {
         PathRequest newRequest = new PathRequest(pathStart, pathEnd, callback);
-        instance.requestQueue.Enqueue(newRequest);
-        instance.TryProcessNext();
+        this.requestQueue.Enqueue(newRequest);
+        this.TryProcessNext();
     }
 
     private void TryProcessNext()

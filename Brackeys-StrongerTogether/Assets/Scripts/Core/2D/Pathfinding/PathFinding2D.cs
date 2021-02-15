@@ -11,6 +11,7 @@ public class PathFinding2D : MonoBehaviour
     private void Awake()
     {
         this.grid = this.GetComponent<Grid>();
+        this.requestManager = this.GetComponent<PathRequestManager>();
     }
     public void StartFindPath(Vector3 start, Vector3 end)
     {
@@ -87,6 +88,7 @@ public class PathFinding2D : MonoBehaviour
             }
             directionOld = directionNew;
         }
+        result.Add(path[path.Count - 1].worldPosition);
         return result.ToArray();
     }
 
