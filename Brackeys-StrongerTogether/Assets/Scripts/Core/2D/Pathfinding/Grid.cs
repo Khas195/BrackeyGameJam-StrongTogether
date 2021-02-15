@@ -5,14 +5,10 @@ using NaughtyAttributes;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 [ExecuteInEditMode]
-public class Grid : SingletonMonobehavior<Grid>
+public class Grid : MonoBehaviour
 {
     [SerializeField]
-    List<Node> path = new List<Node>();
-    [SerializeField]
-    Transform seeker = null;
-    [SerializeField]
-    Transform target = null;
+    bool showGizmos = false;
     [SerializeField]
     LayerMask unwalkableMask;
     [SerializeField]
@@ -29,7 +25,7 @@ public class Grid : SingletonMonobehavior<Grid>
     [SerializeField]
     int gridSizeX, gridSizeY;
 
-    private void Start()
+    private void Awake()
     {
         CreateGrid();
     }
@@ -103,22 +99,14 @@ public class Grid : SingletonMonobehavior<Grid>
 
         if (grid != null)
         {
-            Node playerNode = GetNodeFromWorldPoint(this.seeker.position);
             foreach (var n in grid)
             {
-                if (n == playerNode)
-                {
-                    Gizmos.color = Color.blue;
-                }
-                else if (path.Contains(n))
-                {
-                    Gizmos.color = Color.green;
-                }
-                else
+                if (showGizmos == false)
                 {
                     Gizmos.color = (n.walkable) ? Color.white : Color.red;
+                    Gizmos.DrawWireCube(n.worldPosition, Vector3.one * (nodeDiameter - 0.05f));
                 }
-                Gizmos.DrawWireCube(n.worldPosition, Vector3.one * (nodeDiameter - 0.05f));
+
             }
         }
     }
@@ -136,16 +124,19 @@ public class Grid : SingletonMonobehavior<Grid>
 
     }
     public bool findPath = false;
+
+    public int MaxSize
+    {
+        get
+        {
+            return gridSizeX * gridSizeY;
+        }
+    }
     private void Update()
     {
         if (grid != null)
         {
             UpdateGridState();
-
-            if (findPath)
-            {
-                path = PathFinding2D.GetInstance().FindPath(seeker.position, target.position);
-            }
         }
 
     }

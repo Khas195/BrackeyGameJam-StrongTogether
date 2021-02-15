@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [Serializable]
-public class Node
+public class Node : IHeapItem<Node>
 {
     public bool walkable;
     public Vector3 worldPosition;
@@ -13,11 +13,24 @@ public class Node
     public int gCost;
     public int hCost;
     public Node parent;
+    int heapIndex;
     public int fCost
     {
         get
         {
             return gCost + hCost;
+        }
+    }
+
+    public int HeapIndex
+    {
+        get
+        {
+            return heapIndex;
+        }
+        set
+        {
+            heapIndex = value;
         }
     }
 
@@ -33,15 +46,14 @@ public class Node
     {
         return base.Equals(obj);
     }
-
-    public override int GetHashCode()
+    public int CompareTo(Node other)
     {
-        return base.GetHashCode();
-    }
-
-    public override string ToString()
-    {
-        return base.ToString();
+        int compare = fCost.CompareTo(other.fCost);
+        if (compare == 0)
+        {
+            compare = hCost.CompareTo(other.hCost);
+        }
+        return -compare;
     }
 
     public static bool operator ==(Node lhs, Node rhs)
