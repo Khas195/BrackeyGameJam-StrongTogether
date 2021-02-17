@@ -14,12 +14,18 @@ public class Character2D : MonoBehaviour
     [BoxGroup("Requirements")]
     [Required]
     IMovement movement = null;
+    [SerializeField]
+    [BoxGroup("Requirements")]
+    [Required]
+    MovementData movementData = null;
+
 
 
     // Start is called before the first frame update
     void Start()
     {
         movement.SetRigidBody(body);
+        movement.SetMovementData(movementData);
     }
 
     public GameObject GetHost()

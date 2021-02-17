@@ -58,9 +58,9 @@ public class Movement2D : IMovement
             currentSpeed = 0;
         }
         var vel = new Vector3();
-        vel.y = forward * currentSpeed * Time.deltaTime;
-        vel.x = side * currentSpeed * Time.deltaTime;
-        body2D.MovePosition(body2D.transform.position + vel);
+        vel.y = forward * currentSpeed;
+        vel.x = side * currentSpeed;
+        body2D.MovePosition((body2D.transform.position + vel * Time.fixedDeltaTime));
     }
     /** this function signal the jump input of the player and the jump action should be handle in the next fixed update function  */
     public override void SignalJump()

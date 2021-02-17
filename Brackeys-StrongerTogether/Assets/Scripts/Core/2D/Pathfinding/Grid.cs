@@ -5,12 +5,13 @@ using NaughtyAttributes;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 [ExecuteInEditMode]
-public class Grid : MonoBehaviour
+public class Grid : SingletonMonobehavior<Grid>
 {
     [SerializeField]
     bool showGizmos = false;
     [SerializeField]
-    LayerMask unwalkableMask;
+    LayerMask walkableMask;
+
     [SerializeField]
     [ReadOnly]
     Vector2 gridWorldSize;
@@ -49,10 +50,20 @@ public class Grid : MonoBehaviour
             for (int y = 0; y < gridSizeY; y++)
             {
                 Vector3 worldPoint = worldBottomLeft + Vector3.right * (x * nodeDiameter + nodeRadius) + Vector3.up * (y * nodeDiameter + nodeRadius);
-                bool walkable = !(Physics2D.OverlapBox(worldPoint, new Vector2(nodeRadius, nodeRadius), 0, unwalkableMask));
+                bool walkable = (Physics2D.OverlapBox(worldPoint, new Vector2(nodeRadius, nodeRadius), 0, walkableMask));
                 grid[x, y] = new Node(walkable, worldPoint, x, y);
             }
         }
+    }
+
+    public float GetNodeDiameter()
+    {
+        return nodeDiameter;
+    }
+
+    public float GetTileOffset()
+    {
+        return gridTileOffset;
     }
 
     public List<Node> GetNeighbourNodes(Node node)
@@ -84,13 +95,15 @@ public class Grid : MonoBehaviour
             for (int y = 0; y < gridSizeY; y++)
             {
                 Vector3 worldPoint = worldBottomLeft + Vector3.right * (x * nodeDiameter + nodeRadius) + Vector3.up * (y * nodeDiameter + nodeRadius);
-                bool walkable = !(Physics2D.OverlapCircle(worldPoint, nodeRadius, unwalkableMask));
+                bool walkable = (Physics2D.OverlapCircle(worldPoint, nodeRadius, walkableMask));
                 grid[x, y].walkable = walkable;
             }
         }
 
     }
 
+    [SerializeField]
+    float gridTileOffset;
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
@@ -99,11 +112,13 @@ public class Grid : MonoBehaviour
 
         if (grid != null && showGizmos == true)
         {
+            Gizmos.color = Color.white;
             foreach (var n in grid)
             {
-
-                Gizmos.color = (n.walkable) ? Color.white : Color.red;
-                Gizmos.DrawWireCube(n.worldPosition, Vector3.one * (nodeDiameter - 0.05f));
+                if (n.walkable)
+                {
+                    Gizmos.DrawWireCube(n.worldPosition, Vector3.one * (nodeDiameter - gridTileOffset));
+                }
             }
         }
     }

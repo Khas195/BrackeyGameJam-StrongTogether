@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,21 +7,51 @@ public class AIController : MonoBehaviour
 {
     [SerializeField]
     Transform destination = null;
+    [SerializeField]
+    Transform pivot = null;
+    [SerializeField]
+    Character2D character = null;
     List<Vector3> waypoints = new List<Vector3>();
-    // Update is called once per frame
-    void Update()
+    int currentWaypointIndex = 0;
+
+    private void FixedUpdate()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (waypoints.Count > 0 && currentWaypointIndex < waypoints.Count)
         {
+            if (Vector2.Distance(pivot.transform.position, waypoints[currentWaypointIndex]) <= 0.1f)
+            {
+                currentWaypointIndex++;
+            }
+            else
+            {
+                Vector2 moveDir = (waypoints[currentWaypointIndex] - pivot.transform.position);
+                moveDir = moveDir.normalized;
+                character.Move(moveDir.x, moveDir.y);
+            }
+        }
+        else
+        {
+            currentWaypointIndex = 0;
             waypoints.Clear();
-            PathRequestManager.GetInstance().RequestPath(this.transform.position, destination.transform.position, OnPathFinished);
+            character.Move(0, 0);
         }
     }
+    public void GoTo(Vector2 point)
+    {
+        waypoints.Clear();
+        PathRequestManager.GetInstance().RequestPath(pivot.transform.position, point, OnPathFinished);
+    }
+
     public void OnPathFinished(Vector3[] waypoints, bool pathfindSuccess)
     {
         if (pathfindSuccess)
         {
             this.waypoints.AddRange(waypoints);
+            currentWaypointIndex = 1;
+        }
+        else
+        {
+            Debug.Log("Could not found path");
         }
     }
     private void OnDrawGizmos()
@@ -28,13 +59,13 @@ public class AIController : MonoBehaviour
         Gizmos.color = Color.green;
         if (waypoints.Count > 0)
         {
-            Gizmos.DrawCube(waypoints[0], Vector3.one);
-            Gizmos.DrawLine(waypoints[0], this.transform.position);
+            Gizmos.DrawCube(waypoints[0], Vector3.one * (Grid.GetInstance().GetNodeDiameter() - Grid.GetInstance().GetTileOffset()));
+            Gizmos.DrawLine(waypoints[0], this.pivot.transform.position);
         }
 
         for (int i = 1; i < waypoints.Count; i++)
         {
-            Gizmos.DrawCube(waypoints[i], Vector3.one);
+            Gizmos.DrawCube(waypoints[i], Vector3.one * (Grid.GetInstance().GetNodeDiameter() - Grid.GetInstance().GetTileOffset()));
             Gizmos.DrawLine(waypoints[i - 1], waypoints[i]);
         }
     }
