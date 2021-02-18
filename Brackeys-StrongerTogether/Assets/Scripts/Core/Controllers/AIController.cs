@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AIController : MonoBehaviour
+public class AIController : MonoBehaviour, IObserver
 {
     [SerializeField]
     Transform destination = null;
@@ -14,6 +14,10 @@ public class AIController : MonoBehaviour
     List<Vector3> waypoints = new List<Vector3>();
     int currentWaypointIndex = 0;
 
+    private void Start()
+    {
+        PostOffice.Subscribes(this, FurnitureEvent.FURNITURE_INTERACT_EVENT);
+    }
     private void FixedUpdate()
     {
         if (waypoints.Count > 0 && currentWaypointIndex < waypoints.Count)
@@ -67,6 +71,14 @@ public class AIController : MonoBehaviour
         {
             Gizmos.DrawCube(waypoints[i], Vector3.one * (Grid.GetInstance().GetNodeDiameter() - Grid.GetInstance().GetTileOffset()));
             Gizmos.DrawLine(waypoints[i - 1], waypoints[i]);
+        }
+    }
+
+    public void ReceiveData(DataPack pack, string eventName)
+    {
+        if (eventName.Equals(FurnitureEvent.FURNITURE_INTERACT_EVENT))
+        {
+            var interactPlace = pack.GetValue<Transform>(FurnitureEvent.FURNITURE_INTERACT_PLACE);
         }
     }
 }
