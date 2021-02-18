@@ -6,13 +6,15 @@ using UnityEngine;
 public class AIController : MonoBehaviour, IObserver
 {
     [SerializeField]
-    Transform destination = null;
-    [SerializeField]
     Transform pivot = null;
     [SerializeField]
     Character2D character = null;
+    [SerializeField]
+    int designatedZone = 0;
     List<Vector3> waypoints = new List<Vector3>();
     int currentWaypointIndex = 0;
+    Furniture currentInteractable = null;
+    Furniture targetInteractable = null;
 
     private void Start()
     {
@@ -52,10 +54,24 @@ public class AIController : MonoBehaviour, IObserver
         {
             this.waypoints.AddRange(waypoints);
             currentWaypointIndex = 1;
+            if (currentInteractable != null)
+            {
+                currentInteractable.Defocus();
+                currentInteractable.SetActiveInteract(false);
+            }
+            currentInteractable = targetInteractable;
+            currentInteractable.Focus();
+            currentInteractable.SetActiveInteract(true);
         }
         else
         {
             Debug.Log("Could not found path");
+            if (targetInteractable != null)
+            {
+                targetInteractable.Defocus();
+                targetInteractable.SetActiveInteract(false);
+                targetInteractable = null;
+            }
         }
     }
     private void OnDrawGizmos()
@@ -78,7 +94,25 @@ public class AIController : MonoBehaviour, IObserver
     {
         if (eventName.Equals(FurnitureEvent.FURNITURE_INTERACT_EVENT))
         {
-            var interactPlace = pack.GetValue<Transform>(FurnitureEvent.FURNITURE_INTERACT_PLACE);
+            var zoneID = pack.GetValue<int>(FurnitureEvent.ZONE_ID);
+            if (zoneID == this.designatedZone)
+            {
+                var interactObject = pack.GetValue<Furniture>(FurnitureEvent.TARGET_FURNITURE);
+                InitiateInteractSequence(interactObject);
+            }
         }
+    }
+
+    private void InitiateInteractSequence(Furniture furniture)
+    {
+        if (targetInteractable != null)
+        {
+            targetInteractable.Defocus();
+            currentInteractable.SetActiveInteract(false);
+            targetInteractable = null;
+        }
+        targetInteractable = furniture;
+
+        this.GoTo(furniture.GetInteractPlace());
     }
 }

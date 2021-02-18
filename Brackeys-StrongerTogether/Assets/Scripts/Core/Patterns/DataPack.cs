@@ -7,12 +7,9 @@ public class DataPack
 {
     Dictionary<string, object> datas = new Dictionary<string, object>();
 
-    public bool SetValue(string valueName, object value)
+    public void SetValue(string valueName, object value)
     {
-        if (datas.ContainsKey(valueName) == false) return false;
-
         datas[valueName] = value;
-        return true;
     }
     public T GetValue<T>(string valueName)
     {

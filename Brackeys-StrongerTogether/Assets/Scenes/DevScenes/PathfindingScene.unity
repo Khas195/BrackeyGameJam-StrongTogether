@@ -158,11 +158,14 @@ MonoBehaviour:
   walkableMask:
     serializedVersion: 2
     m_Bits: 512
-  gridWorldSize: {x: 16, y: 16}
+  unwalkableMask:
+    serializedVersion: 2
+    m_Bits: 1024
+  gridWorldSize: {x: 20, y: 20}
   nodeRadius: 0.04
   nodeDiameter: 0.08
-  gridSizeX: 200
-  gridSizeY: 200
+  gridSizeX: 250
+  gridSizeY: 250
   gridTileOffset: 0.02
 --- !u!4 &786287262
 Transform:

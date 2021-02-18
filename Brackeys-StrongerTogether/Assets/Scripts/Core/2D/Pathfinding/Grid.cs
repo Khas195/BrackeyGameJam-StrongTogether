@@ -11,6 +11,8 @@ public class Grid : SingletonMonobehavior<Grid>
     bool showGizmos = false;
     [SerializeField]
     LayerMask walkableMask;
+    [SerializeField]
+    LayerMask unwalkableMask;
 
     [SerializeField]
     [ReadOnly]
@@ -95,8 +97,16 @@ public class Grid : SingletonMonobehavior<Grid>
             for (int y = 0; y < gridSizeY; y++)
             {
                 Vector3 worldPoint = worldBottomLeft + Vector3.right * (x * nodeDiameter + nodeRadius) + Vector3.up * (y * nodeDiameter + nodeRadius);
+                bool unwalkable = (Physics2D.OverlapCircle(worldPoint, nodeRadius, unwalkableMask));
                 bool walkable = (Physics2D.OverlapCircle(worldPoint, nodeRadius, walkableMask));
-                grid[x, y].walkable = walkable;
+                if (unwalkable)
+                {
+                    grid[x, y].walkable = false;
+                }
+                else
+                {
+                    grid[x, y].walkable = walkable;
+                }
             }
         }
 

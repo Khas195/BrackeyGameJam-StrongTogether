@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using NaughtyAttributes;
 using UnityEngine;
@@ -7,7 +8,7 @@ public class FurnitureEvent
 {
     public static string FURNITURE_INTERACT_EVENT = "FURNITURE_INTERACT";
     public static string TARGET_FURNITURE = "FURNITURE";
-    public static string FURNITURE_INTERACT_PLACE = "INTERACT_PLACE";
+    public static string ZONE_ID = "ZONE_ID";
 
 }
 public class Furniture : IInteractable
@@ -21,6 +22,9 @@ public class Furniture : IInteractable
     [SerializeField]
     [Required]
     Transform interactPlace = null;
+    [SerializeField]
+    int zoneID = 0;
+    bool lockHighlight = false;
 
 
     // Start is called before the first frame update
@@ -38,6 +42,7 @@ public class Furniture : IInteractable
     }
     public override void Defocus()
     {
+        if (lockHighlight) return;
         base.Defocus();
         var transparentHighlight = highlightState.color;
         transparentHighlight.a = 0;
@@ -47,6 +52,7 @@ public class Furniture : IInteractable
 
     public override void Focus()
     {
+        if (lockHighlight) return;
         base.Focus();
         var transparentHighlight = highlightState.color;
         transparentHighlight.a = 1;
@@ -58,18 +64,20 @@ public class Furniture : IInteractable
         if (base.Interact() == false) return false;
 
         var dataPack = DataPool.GetInstance().RequestInstance();
-        dataPack.SetValue(FurnitureEvent.FURNITURE_INTERACT_PLACE, this.interactPlace);
         dataPack.SetValue(FurnitureEvent.TARGET_FURNITURE, this);
+        dataPack.SetValue(FurnitureEvent.ZONE_ID, this.zoneID);
         PostOffice.SendData(dataPack, FurnitureEvent.FURNITURE_INTERACT_EVENT);
         DataPool.GetInstance().ReturnInstance(dataPack);
         return true;
     }
-    private void OnMouseOver()
+
+    public void SetActiveInteract(bool activeInteract)
     {
-        Focus();
+        this.lockHighlight = activeInteract;
     }
-    private void OnMouseExit()
+
+    public Vector2 GetInteractPlace()
     {
-        Defocus();
+        return interactPlace.position;
     }
 }
