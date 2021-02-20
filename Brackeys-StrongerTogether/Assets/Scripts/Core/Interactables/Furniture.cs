@@ -16,6 +16,7 @@ public class Furniture : IInteractable
     [SerializeField]
     [Required]
     SpriteRenderer normalState = null;
+
     [SerializeField]
     [Required]
     SpriteRenderer highlightState = null;

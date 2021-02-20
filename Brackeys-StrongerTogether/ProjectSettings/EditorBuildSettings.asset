@@ -26,4 +26,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/DevScenes/PathfindingScene.unity
     guid: 5e15900cbde39a046bb914019b56d9ec
+  - enabled: 1
+    path: Assets/Scenes/GameScenes/SandBox-Level1.unity
+    guid: 18af047d5ca76314d9fe9f69c2f9f9df
+  - enabled: 1
+    path: Assets/Scenes/GameScenes/Characters.unity
+    guid: 8a831acdf7d2dd44ea01eb8532f00a3d
   m_configObjects: {}
