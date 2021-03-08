@@ -6,8 +6,10 @@ using UnityEngine;
 public class CameraControl : MonoBehaviour
 {
     [SerializeField]
+    [Required]
     GameObject cameraObject = null;
     [SerializeField]
+    [Required]
     Camera mainCamera = null;
     [SerializeField]
     [ReadOnly]
@@ -23,6 +25,7 @@ public class CameraControl : MonoBehaviour
     float acceleration = 0.2f;
     [SerializeField]
     float decceleration = 0.2f;
+
 
     // Update is called once per frame
     void LateUpdate()

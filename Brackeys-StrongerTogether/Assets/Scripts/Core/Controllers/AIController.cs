@@ -20,6 +20,7 @@ public class AIController : MonoBehaviour, IObserver
     {
         PostOffice.Subscribes(this, FurnitureEvent.FURNITURE_INTERACT_EVENT);
     }
+
     private void FixedUpdate()
     {
         if (waypoints.Count > 0 && currentWaypointIndex < waypoints.Count)
@@ -42,6 +43,7 @@ public class AIController : MonoBehaviour, IObserver
             character.Move(0, 0);
         }
     }
+
     public void GoTo(Vector2 point)
     {
         waypoints.Clear();
@@ -74,6 +76,7 @@ public class AIController : MonoBehaviour, IObserver
             }
         }
     }
+
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.green;

@@ -24,7 +24,6 @@ public abstract class IInteractable : MonoBehaviour
 
     public virtual bool Interact()
     {
-
         LogHelper.Log(this.GetKindOfInteraction().Bolden() + " " + this.name.Colorize("cyan").Bolden(), true);
         return isFocus;
     }
