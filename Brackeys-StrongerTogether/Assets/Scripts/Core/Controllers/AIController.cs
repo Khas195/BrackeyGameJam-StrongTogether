@@ -115,7 +115,11 @@ public class AIController : MonoBehaviour, IObserver
             targetInteractable = null;
         }
         targetInteractable = furniture;
-
         this.GoTo(furniture.GetInteractPlace());
     }
+    private void OnDestroy()
+    {
+        PostOffice.Unsubscribes(this, FurnitureEvent.FURNITURE_INTERACT_EVENT);
+    }
+
 }
