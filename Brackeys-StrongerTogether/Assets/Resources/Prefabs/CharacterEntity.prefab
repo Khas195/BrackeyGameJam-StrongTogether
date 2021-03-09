@@ -63,7 +63,11 @@ MonoBehaviour:
   satisfactionFallOffPerSecond: 1
   timeUntilNeedMin: 10
   timeUntilNeedMax: 20
-  possibleNeeds: []
+  possibleNeeds:
+  - {fileID: 11400000, guid: 65b29e510fd913141adb2117021bdbd7, type: 2}
+  - {fileID: 11400000, guid: 8a662863ef61942469b17fcddd8e5ee6, type: 2}
+  - {fileID: 11400000, guid: 778c36e3e7ca1e94f8393457fded30b9, type: 2}
+  - {fileID: 11400000, guid: a60c1f2267e1405419aaa56cac586ab9, type: 2}
   needDisplay: {fileID: 3443360812148680045}
 --- !u!114 &3443360811222657468
 MonoBehaviour:
