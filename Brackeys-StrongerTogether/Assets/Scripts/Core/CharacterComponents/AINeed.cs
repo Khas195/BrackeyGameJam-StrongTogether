@@ -37,7 +37,7 @@ public class AINeed : MonoBehaviour
         }
         else if (!isSatisfyingNeed)
         {
-            aISatisfaction.ChangeSatisfactionBy(-satisfactionFallOffPerSecond);
+            aISatisfaction.ChangeSatisfactionBy(-satisfactionFallOffPerSecond * Time.deltaTime);
         }
     }
 
