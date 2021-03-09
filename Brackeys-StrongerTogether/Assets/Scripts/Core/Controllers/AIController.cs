@@ -16,6 +16,25 @@ public class AIController : MonoBehaviour, IObserver
     Furniture currentInteractable = null;
     Furniture targetInteractable = null;
 
+    [SerializeField] public AINeed AINeed { get; private set; }
+    [SerializeField] public AISatisfaction AISatisfaction { get; private set; }
+
+
+    private void Awake()
+    {
+        if(AINeed == null)
+        {
+            AINeed = GetComponent<AINeed>();
+        }
+
+        if (AISatisfaction == null)
+        {
+            AISatisfaction = GetComponent<AISatisfaction>();
+        }
+
+        AINeed.Init(AISatisfaction);
+    }
+
     private void Start()
     {
         PostOffice.Subscribes(this, FurnitureEvent.FURNITURE_INTERACT_EVENT);
