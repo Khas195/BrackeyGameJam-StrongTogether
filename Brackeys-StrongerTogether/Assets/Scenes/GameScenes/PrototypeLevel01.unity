@@ -2047,6 +2047,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3443360811222657468, guid: a30063c73448c534e91904ab683da606, type: 3}
+      propertyPath: satisfactionSlider
+      value: 
+      objectReference: {fileID: 264844016}
     - target: {fileID: 3443360811863039841, guid: a30063c73448c534e91904ab683da606, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.54

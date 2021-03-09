@@ -12,7 +12,7 @@ public class AINeed : MonoBehaviour
 
     private Need currentNeed = null;
     private AISatisfaction aISatisfaction;
-    private Timer needTimer;
+    private Timer needTimer = new Timer();
     private bool isSatisfyingNeed = false;
 
 
