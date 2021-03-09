@@ -75,6 +75,7 @@ public class InGameLogUI : SingletonMonobehavior<InGameLogUI>, IObserver
     {
         consoleText.text = "";
     }
+
     private bool ProcessCommand(string command)
     {
         var words = command.Split(' ');
@@ -115,6 +116,7 @@ public class InGameLogUI : SingletonMonobehavior<InGameLogUI>, IObserver
     private void TurnOn()
     {
         this.gameObject.SetActive(true);
+        controlInputField.Select();
     }
 
     private void TurnOff()
