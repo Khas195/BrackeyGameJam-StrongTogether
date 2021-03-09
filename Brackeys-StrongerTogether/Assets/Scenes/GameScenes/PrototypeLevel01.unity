@@ -1565,18 +1565,6 @@ PrefabInstance:
       propertyPath: satisfactionSlider
       value: 
       objectReference: {fileID: 264844016}
-    - target: {fileID: 3443360811222657471, guid: a30063c73448c534e91904ab683da606, type: 3}
-      propertyPath: possibleNeeds.Array.size
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 3443360811222657471, guid: a30063c73448c534e91904ab683da606, type: 3}
-      propertyPath: possibleNeeds.Array.data[0]
-      value: 
-      objectReference: {fileID: 11400000, guid: 30500a0cbb981994cb40920003eba049, type: 2}
-    - target: {fileID: 3443360811222657471, guid: a30063c73448c534e91904ab683da606, type: 3}
-      propertyPath: possibleNeeds.Array.data[1]
-      value: 
-      objectReference: {fileID: 11400000, guid: bfc3c96ac2223b5448ead9e2b50193dd, type: 2}
     - target: {fileID: 3443360811863039841, guid: a30063c73448c534e91904ab683da606, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.54

@@ -1,12 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using NaughtyAttributes;
 
 public class AINeed : MonoBehaviour, ISatisfier, IWorker
 {
+    [MinMaxSlider(0f, 30f)]
+    public Vector2 timeUntilNeedMinMax;
     [SerializeField] float satisfactionFallOffPerSecond = 1f;
-    [SerializeField] float timeUntilNeedMin = 10f;
-    [SerializeField] float timeUntilNeedMax = 20f;
     [SerializeField] List<NeedData> possibleNeeds;
     [SerializeField] SpriteRenderer needDisplay;
 
@@ -19,7 +20,7 @@ public class AINeed : MonoBehaviour, ISatisfier, IWorker
     public void Init(AISatisfaction aISatisfaction)
     {
         this.aISatisfaction = aISatisfaction;
-        needTimer.Init(Random.Range(timeUntilNeedMin, timeUntilNeedMax));
+        needTimer.Init(Random.Range(timeUntilNeedMinMax.x, timeUntilNeedMinMax.y));
         needDisplay.gameObject.SetActive(false);
     }
 
@@ -32,7 +33,7 @@ public class AINeed : MonoBehaviour, ISatisfier, IWorker
             if (needTimer.CurrentTime <= 0f)
             {
                 ChooseNewNeed();
-                needTimer.Init(Random.Range(timeUntilNeedMin, timeUntilNeedMax));
+                needTimer.Init(Random.Range(timeUntilNeedMinMax.x, timeUntilNeedMinMax.y));
             }
         }
         else if (!isSatisfyingNeed)

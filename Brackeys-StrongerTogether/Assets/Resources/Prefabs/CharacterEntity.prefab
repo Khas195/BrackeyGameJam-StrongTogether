@@ -533,6 +533,7 @@ MonoBehaviour:
   pivot: {fileID: 3443360811863039841}
   character: {fileID: 3443360812281368545}
   designatedZone: 1
+  isMovingThroughWaypoints: 0
 --- !u!114 &3443360811222657471
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -545,14 +546,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c94d3a00edef8234e9fd8437095afa4b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  timeUntilNeedMinMax: {x: 10, y: 15}
   satisfactionFallOffPerSecond: 1
-  timeUntilNeedMin: 10
-  timeUntilNeedMax: 20
   possibleNeeds:
-  - {fileID: 11400000, guid: 65b29e510fd913141adb2117021bdbd7, type: 2}
-  - {fileID: 11400000, guid: 8a662863ef61942469b17fcddd8e5ee6, type: 2}
-  - {fileID: 11400000, guid: 778c36e3e7ca1e94f8393457fded30b9, type: 2}
-  - {fileID: 11400000, guid: a60c1f2267e1405419aaa56cac586ab9, type: 2}
+  - {fileID: 11400000, guid: 30500a0cbb981994cb40920003eba049, type: 2}
+  - {fileID: 11400000, guid: bfc3c96ac2223b5448ead9e2b50193dd, type: 2}
   needDisplay: {fileID: 3443360812148680045}
 --- !u!114 &3443360811222657468
 MonoBehaviour:
