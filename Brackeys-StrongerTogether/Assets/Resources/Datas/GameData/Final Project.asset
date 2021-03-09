@@ -9,11 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e5dd99d74691c4b41a50c8d92cd1d852, type: 3}
-  m_Name: StartGameInstance
+  m_Script: {fileID: 11500000, guid: 6d31f6d86b95520488d8d008e36e7a53, type: 3}
+  m_Name: Final Project
   m_EditorClassIdentifier: 
-  instanceName: NewGame
-  sceneList:
-  - PathfindingScene
-  - Characters
-  - SandBox-Level1 1
+  currentProgress: 0
+  maxProgress: 1

@@ -13,18 +13,21 @@ public class FurnitureEvent
 }
 public class Furniture : IInteractable
 {
-    [SerializeField]
-    [Required]
-    SpriteRenderer normalState = null;
 
+    [BoxGroup("Furniture Data")]
     [SerializeField]
     [Required]
     SpriteRenderer highlightState = null;
+    [BoxGroup("Furniture Data")]
     [SerializeField]
     [Required]
     Transform interactPlace = null;
+    [BoxGroup("Furniture Data")]
     [SerializeField]
     int zoneID = 0;
+    [BoxGroup("Furniture Data")]
+    [SerializeField]
+    [ReadOnly]
     bool lockHighlight = false;
 
 
@@ -36,11 +39,7 @@ public class Furniture : IInteractable
         highlightState.color = transparentHighlight;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
 
-    }
     public override void Defocus()
     {
         if (lockHighlight) return;
@@ -70,6 +69,14 @@ public class Furniture : IInteractable
         PostOffice.SendData(dataPack, FurnitureEvent.FURNITURE_INTERACT_EVENT);
         DataPool.GetInstance().ReturnInstance(dataPack);
         return true;
+    }
+    public virtual void StartInteraction()
+    {
+
+    }
+    public virtual void StopInteraction()
+    {
+
     }
 
     public void SetActiveInteract(bool activeInteract)

@@ -7,6 +7,7 @@ using UnityEngine.Events;
 
 public abstract class IInteractable : MonoBehaviour
 {
+    [BoxGroup("Interactable Data")]
     [SerializeField]
     [ReadOnly]
     protected bool isFocus;

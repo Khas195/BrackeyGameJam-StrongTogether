@@ -103,8 +103,8 @@ public class StateManager : MonoBehaviour
             LogHelper.Log(this + " call State enter for " + requestedState);
             requestedState.OnStateEnter();
         }
-        currentState = requestedState;
         LogHelper.Log(this + " completed transition from " + currentState + " to " + requestedState);
+        currentState = requestedState;
     }
     public State GetCurrentState()
     {
