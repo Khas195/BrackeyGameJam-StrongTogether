@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using NaughtyAttributes;
 using UnityEngine;
@@ -14,7 +15,7 @@ public class NeedObject : Furniture
     [ReadOnly]
     float curTime = 0;
     [SerializeField]
-    IUser currentUser = null;
+    ISatisfier currentUser = null;
     private void Start()
     {
         curTime = 0;
@@ -34,19 +35,23 @@ public class NeedObject : Furniture
     }
 
     [Button]
-    public override void StartInteraction()
+    public override void StartInteraction(IFurnitureUser user)
     {
-        base.StartInteraction();
-        LogHelper.Log("Someone is using " + this.needData);
-        isInUse = true;
-        curTime = 0;
-        this.Focus();
-        this.SetActiveInteract(true);
-    }
-    public void StartInteraction(IUser user)
-    {
-        base.StartInteraction();
-        this.currentUser = user;
+        try
+        {
+            base.StartInteraction(user);
+            LogHelper.Log("Someone is using " + this.needData);
+            isInUse = true;
+            curTime = 0;
+            this.Focus();
+            this.SetActiveInteract(true);
+            this.currentUser = (ISatisfier)user;
+
+        }
+        catch (InvalidCastException e)
+        {
+            LogHelper.LogError("Past the wrong subtype of IFurnitureUser to NeedObject: " + e);
+        }
     }
     [Button]
     public override void StopInteraction()

@@ -70,7 +70,7 @@ public class Furniture : IInteractable
         DataPool.GetInstance().ReturnInstance(dataPack);
         return true;
     }
-    public virtual void StartInteraction()
+    public virtual void StartInteraction(IFurnitureUser user)
     {
 
     }

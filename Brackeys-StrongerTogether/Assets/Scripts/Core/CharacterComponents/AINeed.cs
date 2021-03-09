@@ -2,15 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AINeed : MonoBehaviour
+public class AINeed : MonoBehaviour, ISatisfier, IWorker
 {
     [SerializeField] float satisfactionFallOffPerSecond = 1f;
     [SerializeField] float timeUntilNeedMin = 10f;
     [SerializeField] float timeUntilNeedMax = 20f;
-    [SerializeField] List<Need> possibleNeeds;
+    [SerializeField] List<NeedData> possibleNeeds;
     [SerializeField] SpriteRenderer needDisplay;
 
-    private Need currentNeed = null;
+    private NeedData currentNeed = null;
     private AISatisfaction aISatisfaction;
     private Timer needTimer = new Timer();
     private bool isSatisfyingNeed = false;
@@ -25,11 +25,11 @@ public class AINeed : MonoBehaviour
 
     private void Update()
     {
-        if(currentNeed == null)
+        if (currentNeed == null)
         {
             needTimer.Tick();
 
-            if(needTimer.CurrentTime <= 0f)
+            if (needTimer.CurrentTime <= 0f)
             {
                 ChooseNewNeed();
                 needTimer.Init(Random.Range(timeUntilNeedMin, timeUntilNeedMax));
@@ -41,11 +41,11 @@ public class AINeed : MonoBehaviour
         }
     }
 
-    public void SatisfyNeed(Need need)
+    public void SatisfyNeed(NeedData need)
     {
-        if(need == currentNeed)
+        if (need == currentNeed)
         {
-            aISatisfaction.ChangeSatisfactionBy(need.satisfactionValue);
+            aISatisfaction.ChangeSatisfactionBy(need.SatisfyAmount);
 
             needDisplay.gameObject.SetActive(false);
 
@@ -53,7 +53,7 @@ public class AINeed : MonoBehaviour
         }
     }
 
-    public void EndNeedSatisfaction(Need need)
+    public void EndNeedSatisfaction(NeedData need)
     {
         needTimer.ResetTimer();
         currentNeed = null;
@@ -71,5 +71,15 @@ public class AINeed : MonoBehaviour
     {
         needDisplay.sprite = currentNeed.icon;
         needDisplay.gameObject.SetActive(true);
+    }
+
+    public void Satisfy(NeedData needData)
+    {
+        this.SatisfyNeed(needData);
+    }
+
+    public bool HasActiveNeed()
+    {
+        return currentNeed != null;
     }
 }

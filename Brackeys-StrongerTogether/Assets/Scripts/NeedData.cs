@@ -1,11 +1,13 @@
 using NaughtyAttributes;
 using UnityEngine;
 
+[CreateAssetMenu(fileName = "Need Data", menuName = "Data/Need Type", order = 1)]
+
 public class NeedData : ScriptableObject
 {
     [SerializeField]
     [ShowAssetPreview]
-    Sprite icon;
+    public Sprite icon;
     [SerializeField]
     float satisfyInterval = 0;
     [SerializeField]

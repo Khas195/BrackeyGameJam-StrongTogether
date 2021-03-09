@@ -121,8 +121,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 964215949896970791}
-  - component: {fileID: 964215949896970789}
   - component: {fileID: 964215949896970790}
+  - component: {fileID: 117787526206036164}
   m_Layer: 10
   m_Name: Oven (1)
   m_TagString: Untagged
@@ -137,7 +137,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 964215949896970808}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -3.108, y: 1.882, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -147,23 +147,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &964215949896970789
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 964215949896970808}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 365e2eff00a1abe4fb00ef0497b7cb29, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isFocus: 0
-  normalState: {fileID: 964215950259538861}
-  highlightState: {fileID: 964215949256475283}
-  interactPlace: {fileID: 964215949084801248}
-  zoneID: 1
 --- !u!60 &964215949896970790
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -195,6 +178,26 @@ PolygonCollider2D:
       - {x: -0.0023875833, y: -0.22856873}
       - {x: 0.22364712, y: -0.1235165}
       - {x: 0.24048936, y: 0.11438298}
+--- !u!114 &117787526206036164
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 964215949896970808}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a085c8b6ab6d2d048a5ce5faa2975285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isFocus: 0
+  highlightState: {fileID: 964215949256475283}
+  interactPlace: {fileID: 964215949084801248}
+  zoneID: 1
+  lockHighlight: 0
+  needData: {fileID: 11400000, guid: bfc3c96ac2223b5448ead9e2b50193dd, type: 2}
+  isInUse: 0
+  curTime: 0
 --- !u!1 &964215950259538863
 GameObject:
   m_ObjectHideFlags: 0

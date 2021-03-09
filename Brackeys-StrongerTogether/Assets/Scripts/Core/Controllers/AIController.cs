@@ -1,6 +1,5 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using NaughtyAttributes;
 using UnityEngine;
 
 public class AIController : MonoBehaviour, IObserver
@@ -11,10 +10,14 @@ public class AIController : MonoBehaviour, IObserver
     Character2D character = null;
     [SerializeField]
     int designatedZone = 0;
+    [SerializeField]
+    [ReadOnly]
+    bool isMovingThroughWaypoints = false;
     List<Vector3> waypoints = new List<Vector3>();
     int currentWaypointIndex = 0;
     Furniture currentInteractable = null;
     Furniture targetInteractable = null;
+
 
     [SerializeField] public AINeed AINeed { get; private set; }
     [SerializeField] public AISatisfaction AISatisfaction { get; private set; }
@@ -22,7 +25,7 @@ public class AIController : MonoBehaviour, IObserver
 
     private void Awake()
     {
-        if(AINeed == null)
+        if (AINeed == null)
         {
             AINeed = GetComponent<AINeed>();
         }
@@ -42,9 +45,9 @@ public class AIController : MonoBehaviour, IObserver
 
     private void FixedUpdate()
     {
-        if (waypoints.Count > 0 && currentWaypointIndex < waypoints.Count)
+        if (HasActivePath())
         {
-            if (Vector2.Distance(pivot.transform.position, waypoints[currentWaypointIndex]) <= 0.1f)
+            if (IsAtCurrentWaypoint())
             {
                 currentWaypointIndex++;
             }
@@ -60,7 +63,26 @@ public class AIController : MonoBehaviour, IObserver
             currentWaypointIndex = 0;
             waypoints.Clear();
             character.Move(0, 0);
+
+            if (isMovingThroughWaypoints)
+            {
+                isMovingThroughWaypoints = false;
+                if (currentInteractable != null)
+                {
+                    this.currentInteractable.StartInteraction(this.AINeed);
+                }
+            }
         }
+    }
+
+    private bool IsAtCurrentWaypoint()
+    {
+        return Vector2.Distance(pivot.transform.position, waypoints[currentWaypointIndex]) <= 0.1f;
+    }
+
+    private bool HasActivePath()
+    {
+        return waypoints.Count > 0 && currentWaypointIndex < waypoints.Count;
     }
 
     public void GoTo(Vector2 point)
@@ -79,18 +101,20 @@ public class AIController : MonoBehaviour, IObserver
             {
                 currentInteractable.Defocus();
                 currentInteractable.SetActiveInteract(false);
+                currentInteractable.StopInteraction();
             }
             currentInteractable = targetInteractable;
             currentInteractable.Focus();
             currentInteractable.SetActiveInteract(true);
+            isMovingThroughWaypoints = true;
         }
         else
         {
             Debug.Log("Could not found path");
             if (targetInteractable != null)
             {
-                targetInteractable.Defocus();
                 targetInteractable.SetActiveInteract(false);
+                targetInteractable.Defocus();
                 targetInteractable = null;
             }
         }

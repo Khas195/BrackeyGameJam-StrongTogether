@@ -15,6 +15,6 @@ public class FinalProjectUIUpdater : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        progressText.text = "Progress: " + finalProjectData.CurrentProgress;
+        progressText.text = "Progress: " + (finalProjectData.CurrentProgress * 100).ToString("F2") + "%";
     }
 }

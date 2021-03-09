@@ -7,6 +7,10 @@ public class FinalProject : ScriptableObject
     float currentProgress;
     [SerializeField]
     float maxProgress;
+    private void Awake()
+    {
+        this.Reset();
+    }
 
     public float CurrentProgress { get { return currentProgress; } }
 

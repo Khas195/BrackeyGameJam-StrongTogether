@@ -16,3 +16,4 @@ MonoBehaviour:
   sceneList:
   - PrototypeLevel01
   - PathfindingScene
+  - InGameUI
