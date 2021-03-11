@@ -145,7 +145,7 @@ public class AIController : MonoBehaviour, IObserver
             {
                 var interactObject = pack.GetValue<Furniture>(FurnitureEvent.TARGET_FURNITURE);
                 InitiateInteractSequence(interactObject);
-            }
+                            }
         }
     }
 
@@ -154,7 +154,10 @@ public class AIController : MonoBehaviour, IObserver
         if (targetInteractable != null)
         {
             targetInteractable.Defocus();
-            currentInteractable.SetActiveInteract(false);
+            if(currentInteractable!=null)
+            {
+                currentInteractable.SetActiveInteract(false);
+            }
             targetInteractable = null;
         }
         targetInteractable = furniture;

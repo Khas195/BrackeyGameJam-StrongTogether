@@ -7,16 +7,16 @@ using System.IO;
 
 public class SceneLoadItem : Editor
 {
-    [MenuItem("Open SceneSetup/Prototype02")]
-    static void Prototype02()
-    {
-        OpenScene("Prototype02");
-    }
-
     [MenuItem("Open SceneSetup/Prototype01")]
     static void Prototype01()
     {
         OpenScene("Prototype01");
+    }
+
+    [MenuItem("Open SceneSetup/Prototype02")]
+    static void Prototype02()
+    {
+        OpenScene("Prototype02");
     }
 
     [MenuItem("Open SceneSetup/MainMenu")]
