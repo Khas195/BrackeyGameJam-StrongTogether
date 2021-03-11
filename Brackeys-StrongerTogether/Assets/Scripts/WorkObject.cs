@@ -26,8 +26,10 @@ public class WorkObject : Furniture
     [ReadOnly]
     float curTime = 0;
     IWorker curUser = null;
-    private void Start()
+
+    protected override void Start()
     {
+        base.Start();
         curTime = 0;
     }
 

@@ -32,7 +32,7 @@ public class Furniture : IInteractable
 
 
     // Start is called before the first frame update
-    void Start()
+    protected virtual void Start()
     {
         var transparentHighlight = highlightState.color;
         transparentHighlight.a = 0;

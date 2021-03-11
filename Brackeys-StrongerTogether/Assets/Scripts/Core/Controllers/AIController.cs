@@ -13,6 +13,7 @@ public class AIController : MonoBehaviour, IObserver
     [SerializeField]
     [ReadOnly]
     bool isMovingThroughWaypoints = false;
+    [SerializeField]
     List<Vector3> waypoints = new List<Vector3>();
     int currentWaypointIndex = 0;
     Furniture currentInteractable = null;
@@ -62,7 +63,6 @@ public class AIController : MonoBehaviour, IObserver
         {
             currentWaypointIndex = 0;
             waypoints.Clear();
-            character.Move(0, 0);
 
             if (isMovingThroughWaypoints)
             {
@@ -91,11 +91,11 @@ public class AIController : MonoBehaviour, IObserver
         PathRequestManager.GetInstance().RequestPath(pivot.transform.position, point, OnPathFinished);
     }
 
-    public void OnPathFinished(Vector3[] waypoints, bool pathfindSuccess)
+    public void OnPathFinished(Vector3[] newWaypoints, bool pathfindSuccess)
     {
         if (pathfindSuccess)
         {
-            this.waypoints.AddRange(waypoints);
+            this.waypoints.AddRange(newWaypoints);
             currentWaypointIndex = 1;
             if (currentInteractable != null)
             {
@@ -145,12 +145,17 @@ public class AIController : MonoBehaviour, IObserver
             {
                 var interactObject = pack.GetValue<Furniture>(FurnitureEvent.TARGET_FURNITURE);
                 InitiateInteractSequence(interactObject);
-                            }
+            }
         }
     }
 
     private void InitiateInteractSequence(Furniture furniture)
     {
+        if(targetInteractable == furniture)
+        {
+            return;
+        }
+
         if (targetInteractable != null)
         {
             targetInteractable.Defocus();

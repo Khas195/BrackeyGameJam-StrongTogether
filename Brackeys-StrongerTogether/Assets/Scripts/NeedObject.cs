@@ -16,8 +16,11 @@ public class NeedObject : Furniture
     float curTime = 0;
     [SerializeField]
     ISatisfier currentUser = null;
-    private void Start()
+
+
+    protected override void Start()
     {
+        base.Start();
         curTime = 0;
     }
 
@@ -57,6 +60,7 @@ public class NeedObject : Furniture
     public override void StopInteraction()
     {
         base.StopInteraction();
+        if(currentUser!=null) currentUser.StopSatisfying(this.needData);
         LogHelper.Log(this.needData + " is turned off");
         isInUse = false;
         this.currentUser = null;

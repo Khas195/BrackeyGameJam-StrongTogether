@@ -534,6 +534,7 @@ MonoBehaviour:
   character: {fileID: 3443360812281368545}
   designatedZone: 1
   isMovingThroughWaypoints: 0
+  waypoints: []
 --- !u!114 &3443360811222657471
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -546,11 +547,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c94d3a00edef8234e9fd8437095afa4b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeUntilNeedMinMax: {x: 10, y: 15}
+  timeUntilNeedMinMax: {x: 5, y: 15}
   satisfactionFallOffPerSecond: 1
   possibleNeeds:
   - {fileID: 11400000, guid: 30500a0cbb981994cb40920003eba049, type: 2}
   - {fileID: 11400000, guid: bfc3c96ac2223b5448ead9e2b50193dd, type: 2}
+  - {fileID: 11400000, guid: 84cc7cc8bb93bd943bd6eda463342409, type: 2}
+  - {fileID: 11400000, guid: ef07638e52e370f4aa8ad1ab49a64e15, type: 2}
+  - {fileID: 11400000, guid: 9ebca781ece58e2448a65a088531f7da, type: 2}
   needDisplay: {fileID: 3443360812148680045}
 --- !u!114 &3443360811222657468
 MonoBehaviour:
@@ -613,7 +617,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &3443360811546015359
 Transform:
   m_ObjectHideFlags: 0

@@ -54,8 +54,13 @@ public class AINeed : MonoBehaviour, ISatisfier, IWorker
         }
     }
 
-    public void EndNeedSatisfaction(NeedData need)
+    public void StopSatisfying(NeedData need)
     {
+        if(need != currentNeed)
+        {
+            return;
+        }
+
         needTimer.ResetTimer();
         currentNeed = null;
 

@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: eab39e8f778a8c248a4eb6e864699363, type: 3}
-  m_Name: Oven
+  m_Name: Fridge
   m_EditorClassIdentifier: 
-  icon: {fileID: 21300000, guid: a142f336ce5ba5042a8f90a4c2e52171, type: 3}
-  satisfyInterval: 0.3
-  satisfyAmount: 0.1
+  icon: {fileID: 21300000, guid: 14d37ded2019af54a8d32d8c7bc746e9, type: 3}
+  satisfyInterval: 0.1
+  satisfyAmount: 0.2
