@@ -102,4 +102,9 @@ public class GameMaster : SingletonMonobehavior<GameMaster>, IObserver
     {
         Time.timeScale = 1.0f;
     }
+
+    public void SetStartInstance(GameInstance newStartInstance)
+    {
+        startInstance = newStartInstance;
+    }
 }

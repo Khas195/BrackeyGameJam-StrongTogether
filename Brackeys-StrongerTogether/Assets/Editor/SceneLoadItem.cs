@@ -33,6 +33,8 @@ public class SceneLoadItem : Editor
 
             EditorSceneManager.OpenScene("Assets/Scenes/DevScenes/MasterScene.unity");
 
+            GameMaster.GetInstance().SetStartInstance(gameInstance);
+
             DirectoryInfo path = new DirectoryInfo(Application.dataPath);
 
             FileInfo[] fileInfo = path.GetFiles("*.*", SearchOption.AllDirectories);
